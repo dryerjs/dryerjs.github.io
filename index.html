@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DryerJS - Declarative GraphQL API Library</title>
+    <meta name="description" content="DryerJS is a powerful library that allows you to generate CRUD GraphQL APIs in a declarative way, seamlessly integrating with Apollo Server, Mongoose, and MongoDB. With DryerJS, you can streamline the development of your GraphQL APIs and focus on your application's logic instead of writing repetitive boilerplate code.">
+    <meta name="keywords" content="DryerJS, GraphQL, API, library, CRUD, declarative">
+</head>
+<body>
+    <h1>DryerJS - Declarative GraphQL API Library</h1>
+    <picture>
+        <source media="(prefers-color-scheme: light)" srcset="./logo-dark.png">
+        <source media="(prefers-color-scheme: dark)" srcset="./logo-light.png">
+        <img alt="DryerJS Logo" src="./logo-light.png" width="300px">
+      </picture>
+      
+    <p>
+        <a href="https://codecov.io/gh/dryerjs/dryerjs">
+            <img src="https://codecov.io/gh/dryerjs/dryerjs/graph/badge.svg?token=ZQOWFCGXUK" alt="codecov">
+        </a>
+        <a href="https://github.com/dryerjs/dryerjs/actions">
+            <img src="https://github.com/dryerjs/dryerjs/workflows/CI/badge.svg" alt="Build Status">
+        </a>
+        <a href="https://github.com/dryerjs/dryerjs/actions">
+            <img src="https://github.com/dryerjs/dryerjs/workflows/Release/badge.svg" alt="Release Status">
+        </a>
+        <a href="https://badge.fury.io/js/dryerjs">
+            <img src="https://badge.fury.io/js/dryerjs.svg" alt="npm version">
+        </a>
+    </p>
+    <p>
+        DryerJS is a powerful library that allows you to generate CRUD GraphQL APIs in a declarative way, seamlessly
+        integrating with Apollo Server, Mongoose, and MongoDB. With DryerJS, you can streamline the development of your
+        GraphQL APIs and focus on your application's logic instead of writing repetitive boilerplate code.
+    </p>
+    <h2>Features</h2>
+    <ul>
+        <li>Declarative schema definition for GraphQL APIs.</li>
+        <li>Integration with Apollo Server for GraphQL endpoint setup.</li>
+        <li>Seamless interaction with MongoDB and Mongoose.</li>
+        <li>Fine-grained control over input/output data transformation.</li>
+        <li>Support for input validation and data manipulation.</li>
+        <li>Easily customizable to fit your specific needs.</li>
+    </ul>
+    <h2>Getting Started</h2>
+    <p>To get started with DryerJS, follow these steps:</p>
+    <ol>
+        <li>
+            <p>Init working directory with TypeScript:</p>
+            <pre><code class="lang-bash">
+mkdir my-project &&
+cd my-project &&
+npm init -y &&
+npm install typescript ts-node --save-dev &&
+echo '{
+    "compilerOptions": {
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "module": "CommonJS",
+        "target": "ES2021"
+    }
+}' >> tsconfig.json &&
+touch main.ts
+            </code></pre>
+        </li>
+        <li>
+            <p>Install DryerJS as a dependency in your project:</p>
+            <pre><code class="lang-bash">npm install dryerjs</code></pre>
+        </li>
+        <li>
+            <p>Declare a model and initialize DryerJS in <code>main.ts</code>:</p>
+            <pre><code class="lang-typescript">
+import { Dryer, Property } from 'dryerjs';
+
+export class User {
+    @Property()
+    id: string;
+
+    @Property()
+    email: string;
+
+    @Property()
+    password: string;
+
+    @Property()
+    name: string;
+}
+
+Dryer.init({
+    modelDefinitions: [User],
+    mongoUri: 'mongodb://127.0.0.1:27017/test',
+    port: 3000,
+}).start();
+            </code></pre>
+        </li>
+        <li>
+            <p>Start the server:</p>
+            <pre><code class="lang-bash">npm run env -- ts-node main.ts</code></pre>
+        </li>
+        <li>
+            <p>Open a browser and go to <a href="http://localhost:3000">http://localhost:3000</a> to access the GraphQL
+                playground.</p>
+        </li>
+        <li>
+            <p>Modify your model and see the changes in the GraphQL playground. Utilize features such as Validate, Transform,
+                Default, Enum, and Embedded to customize your model. Explore more complex example models in the <a
+                    href="https://github.com/dryerjs/dryerjs/tree/master/src/example/app.ts">example models</a>.</p>
+        </li>
+    </ol>
+    <h2>Documentation</h2>
+    <p>We are actively working on documentation. In the meantime, you can explore our <a
+        href="https://github.com/dryerjs/dryerjs/tree/master/src/example">example project</a> to see DryerJS in action.
+    </p>
+    <h2>Contributing</h2>
+    <p>We welcome contributions to DryerJS! If you find a bug or have a feature request, please open an issue on our GitHub
+        repository. If you'd like to contribute code, feel free to open a pull request.</p>
+    <h2>Development Guide</h2>
+    <p>To contribute to the development of "DryerJS" or work on your own projects using this library, follow these
+        steps:</p>
+    <h3 id="set-up-your-environment">Set Up Your Environment</h3>
+    <ul>
+        <li>
+            <p>Copy the .env.example file to a new .env file:</p>
+            <pre><code class="lang-bash">cp .env.example .env</code></pre>
+        </li>
+        <li>
+            <p>Start the Example Application</p>
+            <pre><code class="lang-bash">npm run start</code></pre>
+        </li>
+        <li>
+            <p>Visit <a href="http://localhost:PORT">http://localhost:PORT</a> in your web browser, where PORT is the port
+                number specified in your .env file. You should see the GraphQL Playground, allowing you to interact with the
+                API.</p>
+        </li>
+    </ul>
+    <h3 id="unit-testing">Unit Testing</h3>
+    <p>To run unit tests for DryerJS, use the following command:</p>
+    <pre><code class="lang-bash">npm run test</code></pre>
+    <h3 id="end-to-end-testing">End-to-End Testing</h3>
+    <p>To run end-to-end tests, use the following command:</p>
+    <pre><code class="lang-bash">npm run test:e2e</code></pre>
+    <h3 id="updating-snapshots">Updating Snapshots</h3>
+    <p>To update snapshots for end-to-end tests, use the following command:</p>
+    <pre><code class="lang-bash">npm run test:e2e -- --updateSnapshot</code></pre>
+    <h2>License</h2>
+    <p>This project is licensed under the MIT License - see the <a
+        href="https://github.com/dryerjs/dryerjs/blob/master/LICENSE">LICENSE file</a> for details.</p>
+</body>
+</html>
